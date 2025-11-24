@@ -52,7 +52,7 @@ const CourseDetail = () => {
     ? course.lessons.filter((lesson: any) => lesson && lesson._id)
     : [];
   const completedLessons = Array.isArray(progress?.completedLessons) 
-    ? progress.completedLessons 
+    ? (progress.completedLessons as string[]) 
     : [];
 
   return (

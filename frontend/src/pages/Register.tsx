@@ -47,17 +47,18 @@ const Register = () => {
     onSubmit: (values) => {
       const { confirmPassword, ...userData } = values;
       // Удаляем пустые строки из данных
-      if (userData.email === '') {
-        delete userData.email;
+      const cleanedData: any = { ...userData };
+      if (cleanedData.email === '') {
+        delete cleanedData.email;
       }
-      if (userData.firstName === '') {
-        delete userData.firstName;
+      if (cleanedData.firstName === '') {
+        delete cleanedData.firstName;
       }
-      if (userData.lastName === '') {
-        delete userData.lastName;
+      if (cleanedData.lastName === '') {
+        delete cleanedData.lastName;
       }
-      if (userData.group === '') {
-        delete userData.group;
+      if (cleanedData.group === '') {
+        delete cleanedData.group;
       }
       register(userData as any);
     },

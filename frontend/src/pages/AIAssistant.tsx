@@ -210,7 +210,7 @@ const AIAssistant = () => {
               placeholder="Опишите контекст вашего вопроса (например, на каком уроке вы сейчас находитесь, какую тему изучаете)"
               rows={3}
               className="input"
-              disabled={useCourseContext && (courseId || lessonId)}
+              disabled={!!(useCourseContext && (courseId || lessonId))}
             />
             {useCourseContext && (courseId || lessonId) && (
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">

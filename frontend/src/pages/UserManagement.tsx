@@ -259,7 +259,7 @@ const UserManagement = () => {
         fillColor: [245, 247, 250],
       },
       styles: {
-        cellPadding: { top: 4, bottom: 4, left: 3, right: 3 },
+        cellPadding: 3,
         fontSize: 9,
         overflow: 'linebreak',
         cellWidth: 'auto',
@@ -267,23 +267,18 @@ const UserManagement = () => {
       columnStyles: {
         0: { 
           cellWidth: 15,
-          halign: 'center',
         },
         1: { 
           cellWidth: 55,
-          halign: 'left',
         },
         2: { 
           cellWidth: 45,
-          halign: 'left',
         },
         3: { 
           cellWidth: 70,
-          halign: 'left',
         },
         4: { 
           cellWidth: 45,
-          halign: 'center',
         },
       },
       didDrawPage: (data: any) => {

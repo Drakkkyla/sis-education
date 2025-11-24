@@ -241,7 +241,7 @@ const UserManagement = () => {
       head: [['#', 'Login', 'Password', 'Name', 'Role']],
       body: tableData,
       theme: 'striped',
-      margin: { top: 40, left: 10, right: 10 },
+      margin: { top: 40, left: 10, right: 10 } as any,
       tableWidth: 'auto',
       headStyles: {
         fillColor: [37, 99, 235],

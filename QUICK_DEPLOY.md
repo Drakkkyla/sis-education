@@ -3,10 +3,6 @@
 ## 1. Сборка проекта
 
 ```bash
-# Windows
-build-for-hosting.bat
-
-# Linux/Mac
 bash build-for-hosting.sh
 ```
 

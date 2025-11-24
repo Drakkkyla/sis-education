@@ -1,9 +1,0 @@
-@echo off
-chcp 65001 >nul
-echo Starting Frontend Server...
-cd frontend
-echo Installing dependencies...
-call npm install
-echo Starting development server...
-call npm run dev
-

@@ -5,8 +5,10 @@
 ### 1. Подготовка проекта
 
 Запустите скрипт сборки:
-- **Windows:** `build-for-hosting.bat`
-- **Linux/Mac:** `bash build-for-hosting.sh`
+
+```bash
+bash build-for-hosting.sh
+```
 
 Это создаст:
 - `backend/dist/` - скомпилированный бэкенд

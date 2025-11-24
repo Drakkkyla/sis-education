@@ -1,0 +1,13 @@
+@echo off
+chcp 65001 >nul
+echo Starting Backend Server...
+cd backend
+if not exist .env (
+    echo Creating .env file from .env.example...
+    copy .env.example .env
+)
+echo Installing dependencies...
+call npm install
+echo Starting server...
+call npm run dev
+

@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-blue-600 text-white hover:from-primary-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+  }
+  
+  .input {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white transition-all;
+  }
+  
+  .input-sm {
+    @apply px-3 py-2 text-sm;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700 transition-all hover:shadow-xl;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700;
+  }
+}
+
+/* Enhanced lesson content styles */
+@layer components {
+  .lesson-content {
+    @apply text-base leading-relaxed;
+  }
+
+  .lesson-content h1 {
+    @apply text-4xl font-extrabold mt-10 mb-6 pb-4 border-b-4 border-primary-500 dark:border-primary-600;
+    color: #2563eb;
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .lesson-content h1 {
+    color: #60a5fa;
+    background: linear-gradient(to right, #60a5fa, #93c5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .lesson-content h2 {
+    @apply text-3xl font-bold text-gray-900 dark:text-white mt-8 mb-4 flex items-center gap-3;
+    @apply pb-2 border-b-2 border-gray-200 dark:border-gray-700;
+  }
+
+  .lesson-content h3 {
+    @apply text-2xl font-semibold text-gray-800 dark:text-gray-200 mt-6 mb-3;
+    @apply text-primary-700 dark:text-primary-300;
+  }
+
+  .lesson-content h4 {
+    @apply text-xl font-semibold text-gray-700 dark:text-gray-300 mt-5 mb-3;
+  }
+
+  .lesson-content p {
+    @apply mb-4 text-gray-700 dark:text-gray-300 leading-8 text-lg;
+    @apply first:mt-0;
+  }
+
+  .lesson-content ul, .lesson-content ol {
+    @apply mb-4 ml-6 space-y-2;
+  }
+
+  .lesson-content li {
+    @apply text-gray-700 dark:text-gray-300 leading-7 text-base;
+    @apply mb-2;
+  }
+
+  .lesson-content ul li {
+    @apply list-none;
+    @apply pl-4;
+    @apply relative;
+  }
+
+  .lesson-content ul li::before {
+    content: '▸';
+    @apply absolute left-0 text-primary-500 font-bold;
+    @apply -ml-4;
+  }
+
+  .lesson-content ol li {
+    @apply list-decimal;
+    @apply pl-2;
+  }
+
+  .lesson-content blockquote {
+    @apply border-l-4 border-primary-500 bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/30 dark:to-blue-900/20 pl-6 py-4 my-6 rounded-r-lg italic text-gray-800 dark:text-gray-200 text-lg;
+    @apply shadow-sm;
+  }
+
+  .lesson-content blockquote::before {
+    content: '"';
+    @apply text-4xl text-primary-400 font-serif leading-none;
+  }
+
+  .lesson-content code {
+    @apply bg-gray-100 dark:bg-gray-800 text-red-600 dark:text-red-400 px-2 py-1 rounded text-sm font-mono;
+  }
+
+  .lesson-content pre {
+    @apply bg-gray-900 dark:bg-black rounded-lg p-4 my-4 overflow-x-auto border border-gray-700;
+  }
+
+  .lesson-content pre code {
+    @apply bg-transparent text-gray-100 dark:text-gray-200 p-0 text-sm;
+    color: #e5e7eb;
+  }
+
+  /* Command blocks styling */
+  .lesson-content .command-block,
+  .lesson-content pre[class*="command"],
+  .lesson-content pre[class*="config"] {
+    @apply bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-black dark:via-gray-900 dark:to-black;
+    @apply border-l-4 border-green-500;
+    @apply shadow-xl;
+    @apply font-mono text-sm leading-relaxed;
+    @apply p-5 rounded-r-lg;
+    @apply my-6;
+    @apply overflow-x-auto;
+    @apply backdrop-blur-sm;
+  }
+
+  .lesson-content .command-block code {
+    color: #4ade80;
+    background-color: transparent;
+    padding: 0;
+    white-space: pre;
+  }
+
+  /* Syntax highlighting is done via inline styles in JavaScript to avoid Tailwind conflicts */
+
+  .lesson-content .config-header {
+    @apply mb-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-2;
+  }
+
+  .lesson-content .command-highlight {
+    @apply bg-gray-900 dark:bg-black text-green-400 px-2 py-1 rounded font-mono text-sm border border-green-600;
+  }
+
+  .lesson-content .heading-icon {
+    @apply inline-block mr-2;
+  }
+
+  .lesson-content .custom-bullet {
+    @apply text-primary-500 mr-2 font-bold flex-shrink-0;
+  }
+
+  /* Info boxes */
+  .lesson-content .info-box,
+  .lesson-content .tip-box {
+    @apply bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 my-4 rounded-r-lg;
+  }
+
+  .lesson-content .warning-box {
+    @apply bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 my-4 rounded-r-lg;
+  }
+
+  .lesson-content .success-box {
+    @apply bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 my-4 rounded-r-lg;
+  }
+
+  .lesson-content .important-box {
+    @apply bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 my-4 rounded-r-lg;
+  }
+
+  /* Table styling */
+  .lesson-content table {
+    @apply w-full border-collapse my-4;
+  }
+
+  .lesson-content table th {
+    @apply bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-4 py-2 text-left font-semibold;
+  }
+
+  .lesson-content table td {
+    @apply border border-gray-300 dark:border-gray-600 px-4 py-2;
+  }
+
+  .lesson-content table tr:nth-child(even) {
+    @apply bg-gray-50 dark:bg-gray-800/50;
+  }
+
+  /* Links */
+  .lesson-content a {
+    @apply text-primary-600 dark:text-primary-400 hover:underline font-medium;
+  }
+
+  /* Images */
+  .lesson-content img {
+    @apply rounded-xl shadow-lg my-6 max-w-full h-auto;
+    @apply border-2 border-gray-200 dark:border-gray-700;
+    @apply transition-transform hover:scale-105;
+  }
+
+  /* Keyboard keys styling */
+  .lesson-content kbd {
+    @apply bg-gray-200 dark:bg-gray-700 border border-gray-400 dark:border-gray-600 rounded px-2 py-1 text-sm font-mono shadow-sm;
+  }
+
+  /* Highlighted text */
+  .lesson-content mark {
+    @apply bg-yellow-200 dark:bg-yellow-900/50 px-2 py-1 rounded;
+    @apply font-semibold;
+    @apply shadow-sm;
+  }
+
+  /* Emphasis and strong text */
+  .lesson-content strong {
+    @apply font-bold text-gray-900 dark:text-white;
+  }
+
+  .lesson-content em {
+    @apply italic text-gray-800 dark:text-gray-200;
+  }
+
+  /* Section headers with icons */
+  .lesson-content .section-header {
+    @apply flex items-center gap-3 mt-8 mb-4 text-2xl font-bold;
+  }
+
+  /* Step-by-step instructions */
+  .lesson-content .step {
+    @apply bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20;
+    @apply border-l-4 border-blue-500 p-5 my-4 rounded-r-xl;
+    @apply shadow-md;
+    @apply transition-all hover:shadow-lg;
+  }
+
+  .lesson-content .step-number {
+    @apply inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full font-bold mr-4 text-lg;
+    @apply shadow-md;
+  }
+
+  /* Configuration sections */
+  .lesson-content .config-section {
+    @apply bg-gray-50 dark:bg-gray-800/50 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-5 my-6 shadow-md;
+  }
+
+  .lesson-content .config-title {
+    @apply font-bold text-xl mb-4 text-gray-900 dark:text-white flex items-center gap-3 pb-3 border-b-2 border-gray-300 dark:border-gray-600;
+  }
+
+  /* Command line prompt */
+  .lesson-content .command-line {
+    @apply font-mono text-sm;
+  }
+
+  .lesson-content .command-line .prompt {
+    @apply text-green-400 font-bold;
+  }
+
+  .lesson-content .command-line .command {
+    @apply text-white;
+  }
+
+  .lesson-content .command-line .comment {
+    @apply text-gray-500 italic;
+  }
+}
+

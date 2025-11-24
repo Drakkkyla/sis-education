@@ -28,7 +28,7 @@ const CourseDetail = () => {
     queryKey: ['course-progress', id],
     queryFn: () => coursesService.getProgress(id!),
     enabled: !!id,
-  });
+  }) as { data: any };
 
   // Сертификаты временно отключены
 
@@ -56,7 +56,9 @@ const CourseDetail = () => {
     : [];
   
   // Вычисляем процент выполнения
-  const progressPercentage = lessons.length > 0 
+  const progressPercentage = progress && progress.totalLessons 
+    ? Math.round((progress.completedCount / progress.totalLessons) * 100)
+    : lessons.length > 0 
     ? Math.round((completedLessons.length / lessons.length) * 100) 
     : 0;
 

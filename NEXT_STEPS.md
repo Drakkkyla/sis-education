@@ -37,11 +37,15 @@ scp -r photo username@your-server.com:/home/container/
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/kvantorium
+MONGODB_URI=mongodb+srv://lifefo2016_db_user:z7ILr21RiccZJgqH@cluster0.jh4nq6b.mongodb.net/kvantorium?retryWrites=true&w=majority
 JWT_SECRET=ваш-случайный-секретный-ключ-минимум-32-символа
 NODE_ENV=production
 FRONTEND_URL=http://ваш-домен.com
 ```
+
+**Важно:** 
+- В Connection String уже добавлено имя базы данных `kvantorium`
+- Если хотите использовать другое имя базы данных, замените `kvantorium` на нужное
 
 **Важно:**
 - Замените `MONGODB_URI` на вашу строку подключения к MongoDB

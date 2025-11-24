@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersService, CreateUserData, BulkCreateUsersData, BulkCreateByCountData } from '../services/users';
 import { User, GroupType } from '../types';
-import { UserPlus, Users, Trash2, Edit2, Save, X, Upload, Download, FileText, Search, Filter, Lock } from 'lucide-react';
+import { UserPlus, Users, Trash2, Edit2, X, Upload, FileText, Search, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { cn } from '../utils/cn';
-import jsPDF from 'jspdf';
+import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
 const groups: { value: GroupType; label: string; logo: string }[] = [
@@ -236,7 +236,7 @@ const UserManagement = () => {
 
     // Table with improved formatting
     // Calculate available width: 297mm (landscape A4) - 20mm margins = 277mm
-    autoTable(doc, {
+    autoTable(doc as any, {
       startY: 40,
       head: [['#', 'Login', 'Password', 'Name', 'Role']],
       body: tableData,

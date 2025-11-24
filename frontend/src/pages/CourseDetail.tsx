@@ -54,6 +54,11 @@ const CourseDetail = () => {
   const completedLessons = Array.isArray(progress?.completedLessons) 
     ? (progress.completedLessons as string[]) 
     : [];
+  
+  // Вычисляем процент выполнения
+  const progressPercentage = lessons.length > 0 
+    ? Math.round((completedLessons.length / lessons.length) * 100) 
+    : 0;
 
   return (
     <div className="space-y-6">
@@ -96,17 +101,17 @@ const CourseDetail = () => {
           <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
             <div
               className="bg-primary-600 h-2.5 rounded-full transition-all duration-300"
-              style={{ width: `${progress.progressPercentage}%` }}
+              style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Выполнено {progress.progressPercentage}% курса
+            Выполнено {progressPercentage}% курса
           </p>
         </div>
       )}
 
       {/* Certificate Section - Временно отключено */}
-      {progress && progress.progressPercentage === 100 && !isAdmin && (
+      {progress && progressPercentage === 100 && !isAdmin && (
         <div className="card border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
           <div className="flex items-center gap-4">
             <div className="p-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl shadow-lg">
@@ -128,15 +133,15 @@ const CourseDetail = () => {
       {course.summary && (
         <div className={cn(
           "card border-2",
-          progress && progress.progressPercentage === 100
+          progress && progressPercentage === 100
             ? "bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 border-primary-300 dark:border-primary-700"
             : "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800"
         )}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {progress && progress.progressPercentage === 100 ? "🎉 Итоги курса" : "📋 О курсе"}
+              {progress && progressPercentage === 100 ? "🎉 Итоги курса" : "📋 О курсе"}
             </h2>
-            {progress && progress.progressPercentage === 100 && (
+            {progress && progressPercentage === 100 && (
               <span className="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full text-sm font-semibold">
                 Курс завершен!
               </span>
@@ -151,7 +156,7 @@ const CourseDetail = () => {
       )}
 
       {/* Course completion certificate */}
-      {progress && progress.progressPercentage === 100 && (
+      {progress && progressPercentage === 100 && (
         <div className="card bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 border-2 border-yellow-300 dark:border-yellow-700">
           <div className="text-center py-6">
             <div className="text-5xl mb-4">🏆</div>

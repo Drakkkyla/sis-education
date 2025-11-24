@@ -249,12 +249,12 @@ const UserManagement = () => {
         fontStyle: 'bold',
         fontSize: 10,
         halign: 'center',
-      },
+      } as any,
       bodyStyles: {
         textColor: [0, 0, 0],
         fontSize: 9,
         halign: 'left',
-      },
+      } as any,
       alternateRowStyles: {
         fillColor: [245, 247, 250],
       },
@@ -263,7 +263,7 @@ const UserManagement = () => {
         fontSize: 9,
         overflow: 'linebreak',
         cellWidth: 'auto',
-      },
+      } as any,
       columnStyles: {
         0: { 
           cellWidth: 15,

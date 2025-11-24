@@ -60,7 +60,7 @@ const Register = () => {
       if (cleanedData.group === '') {
         delete cleanedData.group;
       }
-      register(userData as any);
+      register(cleanedData);
     },
   });
 

@@ -5,6 +5,22 @@ echo "Сборка проекта для загрузки на хостинг"
 echo "========================================"
 echo ""
 
+# Проверка версии Node.js
+echo "Проверка версии Node.js..."
+NODE_VERSION=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
+if [ "$NODE_VERSION" -lt 18 ]; then
+    echo "ОШИБКА: Требуется Node.js версии 18 или выше!"
+    echo "Текущая версия: $(node -v)"
+    echo ""
+    echo "Для обновления Node.js выполните:"
+    echo "  bash update-nodejs.sh"
+    echo ""
+    echo "Или см. инструкцию в NODEJS_UPDATE.md"
+    exit 1
+fi
+echo "✓ Node.js версия: $(node -v) (OK)"
+echo ""
+
 echo "[1/3] Сборка бэкенда..."
 cd backend
 if [ ! -d "node_modules" ]; then

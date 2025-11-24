@@ -241,7 +241,7 @@ const UserManagement = () => {
       head: [['#', 'Login', 'Password', 'Name', 'Role']],
       body: tableData,
       theme: 'striped',
-      margin: { top: 40, left: 10, right: 10 } as any,
+      margin: { top: 40, left: 10, right: 10 },
       tableWidth: 'auto',
       headStyles: {
         fillColor: [37, 99, 235],
@@ -249,12 +249,12 @@ const UserManagement = () => {
         fontStyle: 'bold',
         fontSize: 10,
         halign: 'center',
-      } as any,
+      },
       bodyStyles: {
         textColor: [0, 0, 0],
         fontSize: 9,
         halign: 'left',
-      } as any,
+      },
       alternateRowStyles: {
         fillColor: [245, 247, 250],
       },
@@ -263,7 +263,7 @@ const UserManagement = () => {
         fontSize: 9,
         overflow: 'linebreak',
         cellWidth: 'auto',
-      } as any,
+      },
       columnStyles: {
         0: { 
           cellWidth: 15,
@@ -297,7 +297,7 @@ const UserManagement = () => {
           doc.text(`Total Users: ${createdUsers.length}`, 148.5, 29, { align: 'center' });
         }
       },
-    });
+    } as any);
 
     // Footer
     const pageCount = doc.internal.pages.length - 1;

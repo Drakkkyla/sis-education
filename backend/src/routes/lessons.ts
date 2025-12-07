@@ -15,6 +15,15 @@ const router = express.Router();
 router.get('/', async (req: express.Request, res: Response) => {
   try {
     const { course } = req.query;
+    // Allow seeing all lessons for admins, or only published for public
+    // But for now let's keep it simple: simple list is public if needed, but usually filtered by course
+    // If request comes from admin panel, we might want to see drafts too.
+    // Let's assume public access gets only published.
+    
+    // Check if user is admin (this logic is complex without auth middleware on public route)
+    // For now, let's return only published for public route.
+    // If admin wants to see all, they should use a different route or we should check auth header here manually.
+    
     const filter: any = { isPublished: true };
 
     if (course) {
@@ -29,6 +38,93 @@ router.get('/', async (req: express.Request, res: Response) => {
   } catch (error: any) {
     console.error('Get lessons error:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+// @route   POST /api/lessons
+// @desc    Create new lesson
+// @access  Private (Admin/Teacher)
+router.post('/', authenticate, async (req: AuthRequest, res: Response) => {
+  try {
+    if (req.user?.role !== 'admin' && req.user?.role !== 'teacher') {
+      return res.status(403).json({ message: 'Нет прав доступа' });
+    }
+
+    const { title, description, content, course: courseId, isPublished, order } = req.body;
+
+    // Validate course
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res.status(404).json({ message: 'Курс не найден' });
+    }
+
+    // Get max order if not provided
+    let lessonOrder = order;
+    if (lessonOrder === undefined) {
+      const lastLesson = await Lesson.findOne({ course: courseId }).sort({ order: -1 });
+      lessonOrder = lastLesson ? lastLesson.order + 1 : 1;
+    }
+
+    const lesson = new Lesson({
+      title,
+      description,
+      content,
+      course: courseId,
+      isPublished: isPublished || false,
+      order: lessonOrder,
+    });
+
+    await lesson.save();
+
+    // Add lesson to course
+    await Course.findByIdAndUpdate(courseId, {
+      $push: { lessons: lesson._id }
+    });
+
+    res.status(201).json(lesson);
+  } catch (error: any) {
+    console.error('Create lesson error:', error);
+    res.status(500).json({ message: 'Ошибка при создании урока', error: error.message });
+  }
+});
+
+// @route   PUT /api/lessons/:id
+// @desc    Update lesson
+// @access  Private (Admin/Teacher)
+router.put('/:id', authenticate, async (req: AuthRequest, res: Response) => {
+  try {
+    if (req.user?.role !== 'admin' && req.user?.role !== 'teacher') {
+      return res.status(403).json({ message: 'Нет прав доступа' });
+    }
+
+    if (!req.params.id || req.params.id.length !== 24) {
+      return res.status(400).json({ message: 'Неверный ID урока' });
+    }
+
+    const lesson = await Lesson.findById(req.params.id);
+    if (!lesson) {
+      return res.status(404).json({ message: 'Урок не найден' });
+    }
+
+    // Update fields
+    const fields = ['title', 'description', 'content', 'isPublished', 'order', 'videoUrl', 'duration'];
+    fields.forEach(field => {
+      if (req.body[field] !== undefined) {
+        (lesson as any)[field] = req.body[field];
+      }
+    });
+
+    // Update photos/resources/exercises if provided (handling arrays)
+    if (req.body.exercises) lesson.exercises = req.body.exercises;
+    if (req.body.resources) lesson.resources = req.body.resources;
+    if (req.body.photos) lesson.photos = req.body.photos;
+
+    await lesson.save();
+
+    res.json(lesson);
+  } catch (error: any) {
+    console.error('Update lesson error:', error);
+    res.status(500).json({ message: 'Ошибка при обновлении урока', error: error.message });
   }
 });
 

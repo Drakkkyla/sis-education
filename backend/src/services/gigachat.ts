@@ -616,6 +616,33 @@ export async function generateLabInstructions(
 
 export default {
   chatCompletion,
+/**
+ * Improve text style and formatting
+ */
+export async function improveText(text: string): Promise<string> {
+  const systemPrompt = `Ты опытный методист и редактор образовательных материалов.
+Твоя задача — улучшить текст урока. Используй дружелюбный, но профессиональный тон.
+Добавь подходящие по смыслу эмодзи, чтобы текст выглядел живым.
+Если текст длинный — разбей на абзацы.
+Не меняй смысл текста, только стиль и форматирование.`;
+
+  const messages: ChatMessage[] = [
+    { role: 'system', content: systemPrompt },
+    {
+      role: 'user',
+      content: `Перепиши этот текст красиво, с эмодзи и правильным форматированием:\n\n"${text}"`,
+    },
+  ];
+
+  return chatCompletion(messages, {
+    model: 'GigaChat-2',
+    temperature: 0.7,
+    max_tokens: 2000,
+  });
+}
+
+export {
+  getAccessToken,
   getStudentAssistance,
   analyzeAnswer,
   generateContent,
@@ -630,5 +657,6 @@ export default {
   translateContent,
   searchCourseContent,
   generateLabInstructions,
+  improveText,
 };
 

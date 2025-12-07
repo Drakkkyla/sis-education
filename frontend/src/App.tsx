@@ -18,6 +18,7 @@ import Profile from './pages/Profile';
 import AIAssistant from './pages/AIAssistant';
 import AITools from './pages/AITools';
 import Achievements from './pages/Achievements';
+import LessonBuilder from './pages/LessonBuilder';
 // import Certificates from './pages/Certificates'; // Временно отключено
 import { authService } from './services/auth';
 
@@ -67,6 +68,22 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="courses" element={<Courses />} />
             <Route path="courses/:id" element={<CourseDetail />} />
+            <Route
+              path="courses/:courseId/lessons/create"
+              element={
+                <ProtectedRoute requiredRole={['admin', 'teacher']}>
+                  <LessonBuilder />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="courses/:courseId/lessons/:lessonId/edit"
+              element={
+                <ProtectedRoute requiredRole={['admin', 'teacher']}>
+                  <LessonBuilder />
+                </ProtectedRoute>
+              }
+            />
             <Route path="lessons/:id" element={<LessonView />} />
             <Route path="quizzes/:id" element={<QuizView />} />
             <Route path="progress" element={<Progress />} />

@@ -78,13 +78,13 @@ const CourseDetail = () => {
               <Edit className="h-4 w-4 mr-2" />
               Редактировать курс
             </button>
-            <button
-              onClick={() => setShowLessonForm(true)}
+            <Link
+              to={`/courses/${id}/lessons/create`}
               className="btn btn-primary"
             >
               <Plus className="h-4 w-4 mr-2" />
               Добавить урок
-            </button>
+            </Link>
           </div>
         )}
       </div>

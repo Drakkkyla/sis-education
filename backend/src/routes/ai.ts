@@ -17,6 +17,7 @@ import {
   translateContent,
   searchCourseContent,
   generateLabInstructions,
+  improveText,
 } from '../services/gigachat';
 import Course from '../models/Course';
 import Lesson from '../models/Lesson';
@@ -820,6 +821,39 @@ router.post('/generate-lesson', authenticate, async (req: AuthRequest, res: Resp
     res.status(statusCode).json({
       success: false,
       message: error.message || 'Ошибка при генерации урока',
+      error: error.message,
+    });
+  }
+});
+
+// @route   POST /api/ai/improve-text
+// @desc    Improve text style and formatting
+// @access  Private (Admin/Teacher)
+router.post('/improve-text', authenticate, async (req: AuthRequest, res: Response) => {
+  try {
+    const { text } = req.body;
+
+    if (!text || typeof text !== 'string' || text.trim().length === 0) {
+      return res.status(400).json({ message: 'Текст обязателен' });
+    }
+
+    const improvedText = await improveText(text.trim());
+
+    res.json({
+      success: true,
+      improvedText,
+    });
+  } catch (error: any) {
+    console.error('AI improve text error:', error);
+    
+    let statusCode = 500;
+    if (error.message?.includes('баланс') || error.message?.includes('средств')) {
+      statusCode = 402;
+    }
+    
+    res.status(statusCode).json({
+      success: false,
+      message: error.message || 'Ошибка при улучшении текста',
       error: error.message,
     });
   }

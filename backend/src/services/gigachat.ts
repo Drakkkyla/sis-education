@@ -614,8 +614,6 @@ export async function generateLabInstructions(
   });
 }
 
-export default {
-  chatCompletion,
 /**
  * Improve text style and formatting
  */

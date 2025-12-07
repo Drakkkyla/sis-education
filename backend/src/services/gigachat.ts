@@ -639,22 +639,4 @@ export async function improveText(text: string): Promise<string> {
   });
 }
 
-export {
-  getAccessToken,
-  getStudentAssistance,
-  analyzeAnswer,
-  generateContent,
-  explainTerm,
-  checkCode,
-  generateExercises,
-  summarizeContent,
-  getLearningRecommendations,
-  explainSimply,
-  generateQuizQuestions,
-  reviewSubmission,
-  translateContent,
-  searchCourseContent,
-  generateLabInstructions,
-  improveText,
-};
 
